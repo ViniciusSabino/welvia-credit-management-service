@@ -1,7 +1,12 @@
-import { IsDateString, IsNumber, IsPositive, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
 
 class SubscriptionRegisterDTO {
-  @IsString()
+  @IsString({
+    message: 'O Campo "name" deve ser String',
+  })
+  @IsNotEmpty()
+  @MinLength(5)
+  @MaxLength(30)
   readonly name!: string;
 
   @IsNumber()
@@ -13,6 +18,7 @@ class SubscriptionRegisterDTO {
   readonly value!: number;
 
   @IsDateString()
+  @IsNotEmpty()
   readonly date!: string;
 }
 
